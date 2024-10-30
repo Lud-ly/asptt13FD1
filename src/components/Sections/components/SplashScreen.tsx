@@ -130,7 +130,7 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
                     )}
                     {currentScreen === 1 && (
                         <div className="flex flex-col items-center justify-center">
-                            <h2 className="text-2xl text-center font-bold py-2 uppercase">
+                            <h2 className="text-2xl text-center font-bold py-5 uppercase">
                                 U13F D1 District de l&#39;hérault
                             </h2>
                             <Image
