@@ -16,6 +16,7 @@ export default function TousLesMatchsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedJournee, setSelectedJournee] = useState<number | null>(null);
+  const [selectedPoule, setSelectedPoule] = useState<string>("1");
 
   // Find the page with the next match closest to the current date
   const findPageWithNextMatch = (allMatches: Match[]): number => {
@@ -29,17 +30,17 @@ export default function TousLesMatchsPage() {
   };
 
   // Fetch all matches and set the page with the closest upcoming match
-  const fetchAllMatches = async () => {
+  const fetchAllMatches = async (selectedPoule: string) => {
     setIsLoading(true);
     try {
-      const firstResponse = await fetch('/api/matchs/1');
+      const firstResponse = await fetch(`/api/matchs/1?poule=${selectedPoule}`); 
       const firstData = await firstResponse.json();
       const totalItems = firstData["hydra:totalItems"];
       const totalPages = Math.ceil(totalItems / 30);
 
       const allMatches: Match[] = [];
       for (let page = 1; page <= totalPages; page++) {
-        const response = await fetch(`/api/matchs/${page}`);
+        const response = await fetch(`/api/matchs/${page}?poule=${selectedPoule}`);
         const data = await response.json();
         allMatches.push(...data["hydra:member"]);
       }
@@ -81,9 +82,14 @@ export default function TousLesMatchsPage() {
     }
   };
 
+  const handlePouleChange = (poule: string) => {
+    setSelectedPoule(poule);
+    fetchAllMatches(poule);
+  };
+
   useEffect(() => {
-    fetchAllMatches(); // Initial fetch
-  }, []);
+    fetchAllMatches(selectedPoule); // Initial fetch
+  }, [selectedPoule]);
 
   useEffect(() => {
     if (currentPage >= 1) {
@@ -121,7 +127,25 @@ export default function TousLesMatchsPage() {
   return (
     <div className="container mx-auto px-1">
       <h1 className="text-2xl font-bold py-5 text-center uppercase">Tous les Matchs</h1>
-
+  {/* Poule Selection */}
+  <div className="flex justify-center mb-4">
+        <button
+          className={`mx-2 px-4 py-2 rounded ${
+            selectedPoule === "1" ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => handlePouleChange("1")} 
+        >
+          Poule A
+        </button>
+        <button
+          className={`mx-2 px-4 py-2 rounded ${
+            selectedPoule === "2" ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
+          onClick={() => handlePouleChange("2")}
+        >
+          Poule B
+        </button>
+      </div>
       <div className="mb-4 text-center flex flex-wrap justify-center">
         {Object.keys(groupedMatches).map((journeeNumber) => (
           <button
