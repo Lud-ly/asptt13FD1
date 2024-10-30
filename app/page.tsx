@@ -105,7 +105,20 @@ const MatchsAVenirPage: React.FC = () => {
                       </span>
                     </>
                   ) : (
-                    <span className="text-sm text-gray-500">Équipe non disponible</span>
+                    <>
+                      <Image
+                        src="/images/what.png"
+                        alt={`Logo placeholder`}
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 mb-2"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = "/images/what.png";
+                        }}
+                      />
+                      <span className="text-sm text-gray-500">Équipe non disponible</span>
+                    </>
                   )}
                 </div>
 
@@ -134,7 +147,20 @@ const MatchsAVenirPage: React.FC = () => {
                       </span>
                     </>
                   ) : (
-                    <span className="text-sm text-gray-500">Équipe non disponible</span>
+                    <>
+                      <Image
+                        src="/images/what.png"
+                        alt={`Logo placeholder`}
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 mb-2"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = "/images/what.png";
+                        }}
+                      />
+                      <span className="text-sm text-gray-500">Équipe non disponible</span>
+                    </>
                   )}
                 </div>
               </div>
