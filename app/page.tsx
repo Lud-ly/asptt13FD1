@@ -31,11 +31,13 @@ const MatchsAVenirPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
 
     const fetchMatches = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch('/api/matchs');
+        const response = await fetch('/api/matchs', { signal });
         if (!response.ok) {
           throw new Error('Failed to fetch match data');
         }
@@ -54,6 +56,9 @@ const MatchsAVenirPage: React.FC = () => {
 
     fetchMatches();
 
+    return () => {
+      controller.abort(); // Annule la requête si le composant est démonté
+    };
   }, []);
 
   if (isLoading) {
