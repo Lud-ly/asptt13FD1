@@ -168,7 +168,7 @@ export default function TousLesMatchsPage() {
                         <td className="p-2 block sm:table-cell">
                           <Link href={`/matchs/${match.ma_no}`} className="block w-full h-full mt-5">
                             <p className="text-center mt-2">
-                              {new Date(match.date).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).replace(/^\w/, (c) => c.toUpperCase())} à <span className="text-blue-500">{match.time}</span>
+                              {new Date(match.date).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).replace(/^\w/, (c) => c.toUpperCase())} à <span className="text-blue-500">{match.time ? match.time : "?"}</span>
                             </p>
                             <div className="flex flex-row justify-around items-center m-2">
                               {/* Équipe domicile */}

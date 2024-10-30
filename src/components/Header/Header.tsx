@@ -11,15 +11,15 @@ export const Header = () => {
 
   return (
     <div
-      className="p-3 flex flex-row justify-between items-center"
+      className="p-5 flex flex-row justify-between items-center"
       style={{ backgroundColor: "#fff", color: "#fff" }}
     >
       <Link href="/" onClick={handleLogoClick}>
         <Image
           src="/images/logo.jpg"
           alt="logo asptt foot"
-          width={70}
-          height={70}
+          width={100}
+          height={100}
           priority
         />
       </Link>

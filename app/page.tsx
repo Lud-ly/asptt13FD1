@@ -31,13 +31,11 @@ const MatchsAVenirPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
 
     const fetchMatches = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch('/api/matchs', { signal });
+        const response = await fetch('/api/matchs');
         if (!response.ok) {
           throw new Error('Failed to fetch match data');
         }
@@ -56,9 +54,6 @@ const MatchsAVenirPage: React.FC = () => {
 
     fetchMatches();
 
-    return () => {
-      controller.abort(); // Annule la requête si le composant est démonté
-    };
   }, []);
 
   if (isLoading) {
@@ -71,7 +66,7 @@ const MatchsAVenirPage: React.FC = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-2xl text-center font-bold py-5 uppercase text-gold">U13F D1 Hérault</h1>
+      <h1 className="text-2xl text-center font-bold py-5 uppercase text-gold">U13 Féminines D1 Hérault poule A</h1>
       <h3 className="text-center font-bold py-5 uppercase">Nos Matchs</h3>
       <div className="grid grid-cols-1 gap-4">
         {matches.map((match) => (
@@ -91,7 +86,7 @@ const MatchsAVenirPage: React.FC = () => {
                         alt={`Logo ${match.home.short_name}`}
                         width={80}
                         height={80}
-                        className="w-10 h-10 mb-2"
+                        className="w-20 h-20 mb-2"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
                           e.currentTarget.src = "/next.svg.png";
@@ -120,7 +115,7 @@ const MatchsAVenirPage: React.FC = () => {
                         alt={`Logo ${match.away.short_name}`}
                         width={80}
                         height={80}
-                        className="w-10 h-10 mb-2"
+                        className="w-20 h-20 mb-2"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
                           e.currentTarget.src = "/next.svg.png";
