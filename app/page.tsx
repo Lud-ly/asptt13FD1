@@ -44,10 +44,15 @@ const MatchsAVenirPage: React.FC = () => {
         const data = await response.json();
         setMatches(data['hydra:member']);
       } catch (error) {
-        if (error === 'AbortError') {
-          console.log('Requête annulée');
+        // Check if the error is an AbortError
+        if (error instanceof Error) {
+          if (error.name === 'AbortError') {
+            console.log('aborted');
+          } else {
+            console.error('Error loading matches:', error.message);
+          }
         } else {
-          console.error('Erreur lors du chargement des matchs:', error);
+          console.error('Unexpected error:', error);
         }
       } finally {
         setIsLoading(false);
