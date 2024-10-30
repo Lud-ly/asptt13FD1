@@ -207,12 +207,12 @@ export default function TousLesMatchsPage() {
                                       className="mb-2"
                                       onError={(e) => {
                                         e.currentTarget.onerror = null;
-                                        e.currentTarget.src = "/next.svg"; // Fallback image
+                                        e.currentTarget.src = "/images/what.png"; // Fallback image
                                       }}
                                     />
                                   ) : (
                                     <Image
-                                      src="/next.svg" // Placeholder logo
+                                      src="/images/what.png" // Placeholder logo
                                       alt="Logo indisponible"
                                       width={70}
                                       height={70}
@@ -221,7 +221,7 @@ export default function TousLesMatchsPage() {
                                   )
                                 ) : (
                                   <Image
-                                    src="/next.svg" // Placeholder logo if home or club is undefined
+                                    src="/images/what.png" // Placeholder logo if home or club is undefined
                                     alt="Logo indisponible"
                                     width={70}
                                     height={70}
@@ -250,12 +250,12 @@ export default function TousLesMatchsPage() {
                                       className="mb-2"
                                       onError={(e) => {
                                         e.currentTarget.onerror = null;
-                                        e.currentTarget.src = "/next.svg"; // Fallback image
+                                        e.currentTarget.src = "/images/what.png"; // Fallback image
                                       }}
                                     />
                                   ) : (
                                     <Image
-                                      src="/next.svg" // Placeholder logo
+                                      src="/images/what.png" // Placeholder logo
                                       alt="Logo indisponible"
                                       width={70}
                                       height={70}
@@ -264,7 +264,7 @@ export default function TousLesMatchsPage() {
                                   )
                                 ) : (
                                   <Image
-                                    src="/next.svg" // Placeholder logo if away or club is undefined
+                                    src="/images/what.png" // Placeholder logo if away or club is undefined
                                     alt="Logo indisponible"
                                     width={70}
                                     height={70}

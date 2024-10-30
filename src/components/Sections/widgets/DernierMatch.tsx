@@ -90,7 +90,7 @@ export default function DernierMatch() {
                                 className="w-16 h-16 mb-2"
                                 onError={(e) => {
                                     e.currentTarget.onerror = null;
-                                    e.currentTarget.src = "/next.svg.png";
+                                    e.currentTarget.src = "/images/what.png";
                                 }}
                             />
                             <span className="text-sm font-bold text-gray-800 text-center">
@@ -115,7 +115,7 @@ export default function DernierMatch() {
                                 className="w-16 h-16 mb-2"
                                 onError={(e) => {
                                     e.currentTarget.onerror = null;
-                                    e.currentTarget.src = "/next.svg.png";
+                                    e.currentTarget.src = "/images/what.png";
                                 }}
                             />
                             <span className="text-sm font-bold text-gray-800 text-center">

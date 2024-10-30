@@ -94,7 +94,7 @@ const MatchAVenirPage: React.FC<{ params: { 'matchId': string } }> = ({ params }
                 {match.home ? (
                     <div className="flex items-center w-1/2 justify-center">
                         <Image
-                            src={match.home.club ? match.home.club.logo : "/path/to/default/logo.png"} // Add a default logo
+                            src={match.home.club ? match.home.club.logo : "/images/what.png"}
                             alt={`Logo ${match.home.short_name || "Non spécifié"}`}
                             width={80}
                             height={80}
@@ -116,7 +116,7 @@ const MatchAVenirPage: React.FC<{ params: { 'matchId': string } }> = ({ params }
                     <div className="flex items-center w-1/2 justify-center">
                         <span className="order-2 md:order-1 ml-4 md:ml-0 md:mr-4 text-lg">{match.away.short_name || "Non spécifié"}</span>
                         <Image
-                            src={match.away.club ? match.away.club.logo : "/path/to/default/logo.png"} // Add a default logo
+                            src={match.away.club ? match.away.club.logo : "/images/what.png"}
                             alt={`Logo ${match.away.short_name || "Non spécifié"}`}
                             width={80}
                             height={80}

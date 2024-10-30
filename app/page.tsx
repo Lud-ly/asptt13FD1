@@ -97,7 +97,7 @@ const MatchsAVenirPage: React.FC = () => {
                         className="w-20 h-20 mb-2"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
-                          e.currentTarget.src = "/next.svg.png";
+                          e.currentTarget.src = "/images/what.png";
                         }}
                       />
                       <span className="text-center truncate max-w-full text-sm">
@@ -126,7 +126,7 @@ const MatchsAVenirPage: React.FC = () => {
                         className="w-20 h-20 mb-2"
                         onError={(e) => {
                           e.currentTarget.onerror = null;
-                          e.currentTarget.src = "/next.svg.png";
+                          e.currentTarget.src = "/images/what.png";
                         }}
                       />
                       <span className="text-center truncate max-w-full text-sm">
