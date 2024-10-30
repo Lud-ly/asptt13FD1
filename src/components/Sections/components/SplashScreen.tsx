@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import anime from "animejs";
 import { useRouter } from "next/navigation";
 
 const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
     const [isMounted, setIsMounted] = useState(false);
-    const [currentScreen, setCurrentScreen] = useState(0); // État pour suivre l'écran actuel
-    const [bgColor, setBgColor] = useState("white"); // Couleur de fond initiale
-    const [hasShownSplash, setHasShownSplash] = useState(false); // État pour vérifier si le splash a été affiché
+    const [currentScreen, setCurrentScreen] = useState(0);
+    const [bgColor, setBgColor] = useState("white");
+    const [hasShownSplash, setHasShownSplash] = useState(false);
     const router = useRouter();
 
-    const animate = () => {
+    // Wrap the animate function in useCallback to avoid dependency issues
+    const animate = useCallback(() => {
         const loader = anime.timeline({
             complete: () => {
                 finishLoading();
-                setHasShownSplash(true); // Met à jour l'état pour indiquer que le splash a été affiché
-                setTimeout(() => {
-                    router.push("/"); // Redirection vers la page d'accueil
-                }, 6000);
+                setHasShownSplash(true);
             },
         });
 
@@ -34,7 +32,7 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
                 duration: 1000,
                 easing: "easeInOutExpo",
                 complete: () => {
-                    setCurrentScreen(1); // Passer au logo 1
+                    setCurrentScreen(1);
                 },
             })
             .add({
@@ -59,11 +57,11 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
             })
             .add({
                 targets: "#logo1",
-                opacity: 0, // Fait disparaître le logo 1
+                opacity: 0,
                 duration: 500,
                 easing: "easeInOutExpo",
                 complete: () => {
-                    setCurrentScreen(2); // Passer au logo 2
+                    setCurrentScreen(2);
                 },
             })
             .add({
@@ -72,9 +70,9 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
                 duration: 500,
                 easing: "easeInOutExpo",
                 begin: () => {
-                    setBgColor("#fff)"); // Change la couleur de fond
+                    setBgColor("#fff");
                 },
-                complete: () => setBgColor("#fff"), // Assure que la couleur de fond reste
+                complete: () => setBgColor("#fff"),
             })
             .add({
                 targets: "#logo2",
@@ -90,16 +88,26 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
                 duration: 500,
                 easing: "easeInOutExpo",
             });
-    };
+    }, [finishLoading]);
 
     useEffect(() => {
-        // Vérifie si le splash screen a déjà été affiché
-        if (!hasShownSplash) {
-            const timeout = setTimeout(() => setIsMounted(true), 10);
-            animate();
-            return () => clearTimeout(timeout);
+        if (hasShownSplash) {
+            return;
         }
-    }, [hasShownSplash]);
+
+        const timeout = setTimeout(() => setIsMounted(true), 10);
+        animate();
+
+        const redirectTimeout = setTimeout(() => {
+            setHasShownSplash(true);
+            router.push("/");
+        }, 6000);
+
+        return () => {
+            clearTimeout(timeout);
+            clearTimeout(redirectTimeout);
+        };
+    }, [hasShownSplash, router, animate]);
 
     return (
         <div className="flex h-screen items-center justify-center" style={{ backgroundColor: bgColor }}>
@@ -120,7 +128,7 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
                             />
                         </div>
                     )}
-                    {currentScreen === 1 && ( // Affiche le logo 1
+                    {currentScreen === 1 && (
                         <div className="flex flex-col items-center justify-center">
                             <h2 className="text-2xl text-center font-bold py-2 uppercase">
                                 U13F D1 District de l&#39;hérault
@@ -134,7 +142,7 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
                             />
                         </div>
                     )}
-                    {currentScreen === 2 && ( // Affiche le logo 2
+                    {currentScreen === 2 && (
                         <Image
                             id="logo2"
                             src="/images/logo.jpg"
